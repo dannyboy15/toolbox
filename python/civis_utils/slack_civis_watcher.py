@@ -1,4 +1,4 @@
-from .utils import wait_for_script
+from utils import wait_for_script
 
 from parsons import Slack
 
