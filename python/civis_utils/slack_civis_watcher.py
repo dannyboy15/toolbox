@@ -42,8 +42,8 @@ def main():
         "(script_id: {script_id}, run_id: {run_id})")
 
     script_type = os.environ["SCRIPT_TYPE"]
-    job_id = int(os.environ["JOB_ID"])
-    run_id = int(os.getenv("RUN_ID", get_last_run_id(job_id)))
+    job_id = int(os.environ["TGT_JOB_ID"])
+    run_id = int(os.getenv("TGT_RUN_ID", get_last_run_id(job_id)))
 
     channel = os.environ["SLACK_CHANNEL"]
     message = os.getenv("SLACK_MESSAGE", DEFAULT_MESSAGE)
