@@ -89,12 +89,12 @@ def process_file_type(filename):
         return process_file_type(unzip_archive(filename)[0])
 
 
-def to_database(tbl, tablename, db="postgress"):
+def to_database(tbl, tablename, db="postgress", **kwargs):
     if db == "postgress":
-        tbl.to_postgres(tablename)
+        tbl.to_postgres(tablename, **kwargs)
 
     if db == "redshift":
-        tbl.to_redshift(tablename)
+        tbl.to_redshift(tablename, **kwargs)
 
 
 @click.command()
@@ -102,10 +102,11 @@ def to_database(tbl, tablename, db="postgress"):
 @click.option("--schema", default="public")
 @click.option("--db_type", default="postgres")
 @click.option("--table")
+@click.option("--kwargs")
 # ENH add dry-run option
 # @click.option("--file-type", default="csv")
 # ENH accept different files types in glob
-def main(path, schema, table, db_type):
+def main(path, schema, table, db_type, kwargs):
     typ = get_type(path)
 
     print("Looking for files to import into the database...")
@@ -118,6 +119,9 @@ def main(path, schema, table, db_type):
 
     else:
         print("Invalid file or path")
+
+    kwargs_ = ({k: v for k, v in [x.split("=") for x in kwargs.split(",")]}
+               if kwargs else {})
 
     print(f"Found the following files: {files}")
 
@@ -133,7 +137,7 @@ def main(path, schema, table, db_type):
         else:
             tablename = f"{schema}.{get_tablename(file)}"
 
-        to_database(tbl, tablename, db=db_type)
+        to_database(tbl, tablename, db=db_type, **kwargs_)
 
         # TODO: update parsons to return the sql file
         # sql = Postgres().create_statement(tbl, tablename)
