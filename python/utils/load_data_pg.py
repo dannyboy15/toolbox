@@ -1,8 +1,9 @@
-from parsons import Table, Postgres
-
+from parsons.utilities.zip_archive import unzip_archive
+from parsons import Table
 import click
 import glob
 import os
+import petl
 import re
 
 
@@ -65,17 +66,49 @@ def _format_tablename(tablename):
     return tablename[:63]
 
 
+def process_file_type(filename):
+
+    # check for csv or gzipped csv.
+    if (filename.endswith(".csv")
+            or (filename.endswith(".gz") and ".csv" in filename)):
+        return Table.from_csv(filename)
+
+    # get teh first sheet from the xlsx file
+    # ENH: add support for handling xlsx with multiple sheets
+    elif filename.endswith(".xlsx"):
+        data = petl.fromxlsx(filename)
+        return Table(data)
+
+    # ENH: add support for json and jsonlines files
+    elif filename.endswith(".json"):
+        raise NotImplementedError("No support for json files")
+
+    # get the first file in an zip archive
+    # ENH: Add support for handling zips with multiples files
+    elif filename.endswith("zip"):
+        return process_file_type(unzip_archive(filename)[0])
+
+
+def to_database(tbl, tablename, db="postgress"):
+    if db == "postgress":
+        tbl.to_postgres(tablename)
+
+    if db == "redshift":
+        tbl.to_redshift(tablename)
+
+
 @click.command()
 @click.argument("path")
 @click.option("--schema", default="public")
-# @click.option("--tablename")
-# ENH accept different files types
+@click.option("--db_type", default="postgres")
+@click.option("--table")
 # ENH add dry-run option
 # @click.option("--file-type", default="csv")
-def main(path, schema):
+# ENH accept different files types in glob
+def main(path, schema, table, db_type):
     typ = get_type(path)
 
-    print("Looking for files to import into postgres...")
+    print("Looking for files to import into the database...")
     if typ == 'dir':
         path_ = os.path.join(path, "*.csv")
         files = glob.glob(path_)
@@ -90,20 +123,26 @@ def main(path, schema):
 
     for file in files:
         print(f"Importing {file}...")
-        tbl = Table.from_csv(file)
-        tablename = f"{schema}.{get_tablename(file)}"
+        tbl = process_file_type(file)
 
-        tbl.to_postgres(tablename)
+        if table:
+            if "." in table:
+                tablename = table
+            else:
+                tablename = f"{schema}.{table}"
+        else:
+            tablename = f"{schema}.{get_tablename(file)}"
 
-        sql = Postgres().create_statement(tbl, tablename)
+        to_database(tbl, tablename, db=db_type)
 
-        sql_ddl_file = f"sql/{get_tablename(file)}_ddl.sql"
-        with open(sql_ddl_file, "w") as f:
-            f.write(sql)
+        # TODO: update parsons to return the sql file
+        # sql = Postgres().create_statement(tbl, tablename)
 
-        print(
-            f"File {file} imported into {tablename} and "
-            f"DDL sql saved to {sql_ddl_file}.")
+        # sql_ddl_file = f"sql/{get_tablename(file)}_ddl.sql"
+        # with open(sql_ddl_file, "w") as f:
+        #     f.write(sql)
+
+        print(f"File {file} imported into {tablename}")
 
 
 if __name__ == '__main__':
