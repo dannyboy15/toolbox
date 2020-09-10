@@ -75,6 +75,8 @@ commited code can be tested and have results show up in GitHub PRs.
 
 > Source Type: Branch; Source: /.\*/; Tag: beta-{sourceref}
 
+---
+
 <!-- TODO: Add more info on CI/CD -->
 
 1. <span id="fn-ci-cd"></span> [CI = Continuous Integration, CD = Continuous
