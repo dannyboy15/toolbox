@@ -10,7 +10,7 @@ _with help from https://medium.com/@bilalbayasut/github-how-to-make-a-fork-of-pu
 
 _NOTE: If you have 2FA turned on for your GitHub account, you will need to
 create a personal access token to login in. Visit
-`https://github.com/settings/tokens` to generate one._
+https://github.com/settings/tokens to generate one._
 
 1. Create a private repo
 
