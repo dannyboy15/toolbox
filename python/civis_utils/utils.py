@@ -30,6 +30,22 @@ def upload_file_as_civis_script_outputs(filename, civis_job_id=None,
         job_id, run_id, 'File', file_id)
 
 
+def upload_logs_as_civis_script_outputs(lgr):
+    """Upload the logs files as outputs to a Civis Script.
+
+    If the script is running locally, then the function does nothing.
+
+    `Args:`
+        lgr: logging.Logger
+            The logger object with file handlers.
+    """
+    for handle in lgr.handlers:
+        if isinstance(handle, logging.FileHandler):
+            log_file = handle.baseFilename
+
+            upload_file_as_civis_script_outputs(log_file)
+
+
 def wait_for_script(script_type,
                     job_id,
                     run_id,
