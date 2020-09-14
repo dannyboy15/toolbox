@@ -25,6 +25,7 @@ View your current configurations
 ```bash
 git config --list
 ```
+
 Add your name and email. _Note: this configures the current repo, to set it
 globally use the `--global` flag._
 
@@ -32,7 +33,6 @@ globally use the `--global` flag._
 git config user.name 'Daniel Bravo'
 git config user.email 'bravod60@gmail.com'
 ```
-
 
 ## Stashing files
 
@@ -49,6 +49,7 @@ _Note: by default `git stash` only stashes teacked files_
 ```bash
 git stash
 ```
+
 **stash specific modified tracked files**
 
 ```bash
@@ -73,23 +74,30 @@ pop specific stashes by providing the stash id/number.
 **pop the last stash**
 
 ```bash
-git stash pop 
+git stash pop
 ```
 
-**pop a specific stash**  
+**pop a specific stash**
 You may want to list out the stashes first.
 
 ```bash
 git stash list
 ```
+
 ```
 stash@{0}: WIP on branch-1: 4h45h01 last commit message
 stash@{1}: WIP on branch-1: 4h45h02 last commit message
 ```
+
 ```bash
 git stash pop 1
 ```
 
+named stash
+
+```bash
+git stash -m 'name-of-stash'
+```
 
 ## Making commits
 
@@ -109,8 +117,7 @@ git add -i <file>
 
 **[TODO: include some info on add commands]**
 
-
-## Editing commits 
+## Editing commits
 
 Editing commits can be really tricky so be careful. **Once you push your changes
 to a remote server it is harder to edit the history**
@@ -133,6 +140,7 @@ it _after you have configured it_.
 ```bash
 git commit --amend --reset-author --no-edit
 ```
+
 It may also be useful if you need to edit the commit to attribute someone else.
 
 ```bash
@@ -157,13 +165,12 @@ Once your start rebasing use the commands to make the changes.
 
 **[TODO: include some info on rebase commands]**
 
-
 ## Diffs and viewing changes
 
-_Note: this uses the mac `diff` command, which is different than runnig
+\_Note: this uses the mac `diff` command, which is different than runnig
 `git diff`.
 
-Get the diff of 2 files, ignoring double quotes/single quotes and redirect 
+Get the diff of 2 files, ignoring double quotes/single quotes and redirect
 the diff to a file. Add the `.diff` file extension for syntax highlighting in
 test editors.
 
@@ -176,8 +183,8 @@ diff --ignore-matching-lines="['\"].*['\"]" file.txt file2.txt > files.diff
 ```
 
 ## TODO
+
 - [ ] include some info on add commands
 - [ ] include some info on rebase commands
 - [ ] add info on git-cherry-pick
 - [ ] add info on git-reflog
- 
