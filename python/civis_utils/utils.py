@@ -31,8 +31,8 @@ def wait_for_script(script_type,
             (Optional) If `True` returns a future insead of the result of the
             of the script. Defaults to `False`.
 
-        `Returns:`
-            The result of the script.
+    `Returns:`
+        The result of the script.
     """
     script_types = {
         "custom": client.scripts.get_custom_runs,
