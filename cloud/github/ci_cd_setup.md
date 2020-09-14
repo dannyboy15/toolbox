@@ -1,8 +1,9 @@
 # CI/CD Setup
 
-This runs through setting up a basic CI/CD[^1] workflow. It will connect a
-[GitHub](https://github.com/) repo to [CircleCI](https://circleci.com/) for
-testing and [Docker Hub](https://hub.docker.com/) for building a docker image.
+This runs through setting up a basic CI/CD[<sup id="p-ci-cd">1</sup>](#fn-ci-cd)
+workflow. It will connect a [GitHub](https://github.com/) repo to
+[CircleCI](https://circleci.com/) for testing and
+[Docker Hub](https://hub.docker.com/) for building a docker image.
 
 ## Setting up GitHub
 
@@ -76,4 +77,5 @@ commited code can be tested and have results show up in GitHub PRs.
 
 <!-- TODO: Add more info on CI/CD -->
 
-[^1]: CI = Continuous Integration, CD = Continuous Deployment
+1. <span id="fn-ci-cd"></span> [CI = Continuous Integration, CD = Continuous
+   Deployment](#p-ci-cd)
