@@ -78,3 +78,46 @@ def generate_password(length=12, req_lower=True, req_upper=True,
         if (all(test(password) for test in tests)):
             break
     return password
+
+
+def seconds_to_text(secs, as_time_str=False):
+    """Format seconds into their time parts.
+
+    `Args:`
+        secs: int
+            The seconds to format.
+        as_time_str: bool
+            If true, returns the seconds represented as human readable (e.g.
+            1 minute 20 seconds). Otherwise used time format. Defaults to
+            False.
+    `Returns:`
+        str
+            The formatted seconds.
+    """
+    # Adapted from
+    # https://gist.github.com/Highstaker/280a09591df4a5fb1363b0bbaf858f0d
+    days = secs//86400
+    hours = (secs - days*86400)//3600
+    minutes = (secs - days*86400 - hours*3600)//60
+    seconds = secs - days*86400 - hours*3600 - minutes*60
+
+    days_text = "day{}".format("s" if days != 1 else "")
+    hours_text = "hour{}".format("s" if hours != 1 else "")
+    minutes_text = "minute{}".format("s" if minutes != 1 else "")
+    seconds_text = "second{}".format("s" if seconds != 1 else "")
+
+    if as_time_str:
+        result = ":".join(filter(lambda x: bool(x), [
+            "{0} {1}".format(int(days), days_text) if days else "",
+            "{0:02d}".format(int(hours)) if hours else "",
+            "{0:02d}".format(int(minutes)) if minutes else "00",
+            "{0:02.4f}".format(seconds) if seconds else "00"
+        ]))
+    else:
+        result = ", ".join(filter(lambda x: bool(x), [
+            "{0} {1}".format(int(days), days_text) if days else "",
+            "{0} {1}".format(int(hours), hours_text) if hours else "",
+            "{0} {1}".format(int(minutes), minutes_text) if minutes else "",
+            "{0:.4f} {1}".format(seconds, seconds_text) if seconds else ""
+        ]))
+    return result
