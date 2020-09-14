@@ -1,5 +1,33 @@
 import civis
 import logging
+import os
+
+
+def upload_file_as_civis_script_outputs(filename, civis_job_id=None,
+                                        civis_run_id=None):
+    """Upload a file as output to a Civis Script.
+
+    Currently only supports container scripts. _Note: The scripts must be
+    running when this function is called._
+
+    `Args:`
+        civis_job_id: int
+            The job id for a Civis container script.
+        civis_run_id: int
+            The run id for a Civis container script run.
+    """
+    job_id = civis_job_id or os.getenv("CIVIS_JOB_ID")
+    run_id = civis_run_id or os.getenv("CIVIS_RUN_ID")
+
+    if not (job_id and run_id):
+        print("Invalid job_id/run_id. Did not upload the file.")
+
+    with open(filename, "r") as f:
+        file_id = civis.io.file_to_civis(f, filename)
+
+    client = civis.APIClient()
+    client.scripts.post_containers_runs_outputs(
+        job_id, run_id, 'File', file_id)
 
 
 def wait_for_script(script_type,
