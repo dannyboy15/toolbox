@@ -1,6 +1,7 @@
 import civis
 import logging
 import os
+import json
 
 
 def upload_file_as_civis_script_outputs(filename, civis_job_id=None,
@@ -44,6 +45,51 @@ def upload_logs_as_civis_script_outputs(lgr):
             log_file = handle.baseFilename
 
             upload_file_as_civis_script_outputs(log_file)
+
+
+def upload_dict_as_civis_script_outputs(data, output_name="", job_id=None,
+                                        run_id=None):
+    """Upload the dict as outputs to a Civis Script.
+
+    If the script is running locally, then the function does nothing.
+
+    `Args:`
+        data: dict or any
+            The values to upload as ouptuts.
+        output_name:
+            If data is not a dict, this will be the name associated with the
+            output data.
+        civis_job_id: int
+            The job id for a Civis container script.
+        civis_run_id: int
+            The run id for a Civis container script run.
+    """
+    job_id = job_id or os.getenv("CIVIS_JOB_ID")
+    run_id = run_id or os.getenv("CIVIS_RUN_ID")
+
+    # Check again to see if there were in the environment
+    if not job_id and not run_id:
+        return
+
+    if isinstance(data, dict):
+        json_outputs = [
+            {"value_str": json.dumps(val), "name": key}
+            for key, val in data.items()
+        ]
+
+    else:
+        json_outputs = [
+            {"value_str": json.dumps(data), "name": output_name}
+        ]
+
+    client = civis.APIClient()
+    for output in json_outputs:
+        # save output to civis
+        json_value_object = client.json_values.post(**output)
+
+        # post it as a run output
+        client.scripts.post_containers_runs_outputs(
+            job_id, run_id, 'JSONValue', json_value_object["id"])
 
 
 def wait_for_script(script_type,
