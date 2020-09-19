@@ -1,8 +1,10 @@
+from functools import wraps
 import hashlib
 import inspect
 import os
 import secrets
 import string
+import time
 
 
 def md5_hash(string):
@@ -121,6 +123,66 @@ def seconds_to_text(secs, as_time_str=False):
             "{0:.4f} {1}".format(seconds, seconds_text) if seconds else ""
         ]))
     return result
+
+
+def timeit(func):
+    """Modify a function to return result and run statistics.
+
+    Example:
+    .. code-block:: python
+        >>> from utils import timeit
+
+        >>> @timeit
+        ... def my_function(arg1):
+        ...    return f"The arg is {arg1}"
+        ...
+        >>> my_function("hello")
+        ("The arg is hello", {"function": "my_function", "args": ("hello"),
+        "kwargs": (), "runtime": 0.0001})
+
+    `Args:`
+        func: callable
+            The function to wrap.
+    `Returns:`
+        tuple
+            The first item in the tuple is the result of the wrapped function,
+            or None, the second item is a dicitonary with run statistics.
+    """
+    @wraps(func)
+    def wrap(*args, **kwargs):
+        try:
+            ts = time()
+            result = func(*args, **kwargs)
+        except Exception:
+            te = time()
+            print(f"Function failed after {te-ts:2.4f} secs.")
+            print(
+                f'function:{func.__name__} args:[{args}, {kwargs}] '
+                f'took: {te-ts:2.4f} sec')
+            # Can be used to upload stats to Civis in case of failure
+            # post_json_outputs({
+            #     "function": func.__name__,
+            #     "args": args,
+            #     "kwargs": kwargs,
+            #     "runtime": f"{te-ts}",
+            # }, "timeit")
+            raise
+
+        te = time()
+        # if do_print:
+        #     print(
+        #         f'function:{f.__name__} args:[{args}, {kwargs}] '
+        #         f'took: {te-ts:2.4f} sec')
+
+        result = (result, {
+            "function": func.__name__,
+            "args": args,
+            "kwargs": kwargs,
+            "runtime": f"{te-ts}",
+        })
+
+        return result
+    return wrap
 
 
 def github_url_to_raw_text_url(url):
