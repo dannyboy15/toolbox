@@ -121,3 +121,26 @@ def seconds_to_text(secs, as_time_str=False):
             "{0:.4f} {1}".format(seconds, seconds_text) if seconds else ""
         ]))
     return result
+
+
+def github_url_to_raw_text_url(url):
+    """Return the raw text url for the GitHub resource.
+
+    `Args:`
+        url: str
+            The url for the GitHub resource.
+    `Return:`
+        str
+            The raw text url for the GitHub resource.
+    """
+    if "gist." in url:
+        url = f"{url}/raw"
+
+    elif "github.com" in url:
+        # raw content is hosted on a different host url
+        url = url.replace("github.com", "raw.githubusercontent.com")
+
+        # raw content url doesn't contain 'blob'
+        url = url.replace("blob/", "")
+
+    return url
