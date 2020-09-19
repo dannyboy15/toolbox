@@ -2,6 +2,7 @@ import civis
 import logging
 import os
 import json
+import sys
 
 
 def upload_file_as_civis_script_outputs(filename, civis_job_id=None,
