@@ -61,6 +61,9 @@ using globs
 git stash <file*.txt> <dir/*>
 ```
 
+# stash certain changes (not everything that's been modified)
+git stash -p
+
 **stash untracked files**
 
 ```bash
