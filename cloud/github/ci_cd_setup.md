@@ -56,6 +56,11 @@ commited code can be tested and have results show up in GitHub PRs.
 
 1. Sign in/create an account
 2. Connect to GitHub
+
+- _Note: for organizations you may need to explicitly [grant access
+  to Docker Hub](https://docs.docker.com/docker-hub/builds/link-source/#grant-access-to-a-github-organization).
+  You will need owner/admin access for this._
+
 3. Create a Docker Hub repo
 4. Add build rule triggers
 5. (Optional) Connect to Civis

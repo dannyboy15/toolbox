@@ -76,10 +76,10 @@ pop specific stashes by providing the stash id/number.
 **pop the last stash**
 
 ```bash
-git stash pop 
+git stash pop
 ```
 
-**pop a specific stash**  
+**pop a specific stash**
 You may want to list out the stashes first.
 
 ```bash
@@ -113,7 +113,7 @@ git add -i <file>
 **[TODO: include some info on add commands]**
 
 
-## Editing commits 
+## Editing commits
 
 Editing commits can be really tricky so be careful. **Once you push your changes
 to a remote server it is harder to edit the history**
@@ -166,7 +166,7 @@ Once your start rebasing use the commands to make the changes.
 _Note: this uses the mac `diff` command, which is different than runnig
 `git diff`.
 
-Get the diff of 2 files, ignoring double quotes/single quotes and redirect 
+Get the diff of 2 files, ignoring double quotes/single quotes and redirect
 the diff to a file. Add the `.diff` file extension for syntax highlighting in
 test editors.
 
@@ -183,4 +183,3 @@ diff --ignore-matching-lines="['\"].*['\"]" file.txt file2.txt > files.diff
 - [ ] include some info on rebase commands
 - [ ] add info on git-cherry-pick
 - [ ] add info on git-reflog
- 

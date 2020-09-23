@@ -61,7 +61,7 @@ git push origin master
 
 To pull changes from the public (upstream) repo do this.
 
-_NOTE: you only need to add the remote once/_
+_NOTE: you only need to add the remote once._
 
 ```bash
 # Add the upstream remote
