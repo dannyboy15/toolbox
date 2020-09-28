@@ -1,0 +1,48 @@
+from pprint import pformat
+import readline
+import subprocess
+
+from tabulate import tabulate
+
+
+def history(numLines=-1):
+    total = readline.get_current_history_length()
+    if numLines == -1:
+        # default value prints everything
+        numLines = total
+    if numLines > 0:
+        # range from n->end in order to incl. recent line
+        for i in range(total - numLines, total):
+            print(readline.get_history_item(i + 1))
+
+
+def to_clipboard(data, pretty=False):
+    if pretty:
+        out = data
+    else:
+        if isinstance(data, bytes):
+            out = data.encode("utf-8")
+        elif isinstance(data, str):
+            out = data
+        else:
+            try:
+                out = str(data)
+            except Exception:
+                print("Invalid object. Cannot serialize.")
+
+    if pretty:
+        out = pformat(out)
+
+    subprocess.run("pbcopy", universal_newlines=True, input=out)
+    print("Copied data to clipboard")
+
+
+def to_gh_md(data):
+    data = data.strip()
+
+    data_list = data.split("\n")
+
+    headers = data_list[0].split(",")
+    rows = [x.split(",") for x in data_list[1:]]
+
+    return tabulate(rows, headers=headers, tablefmt="github")
