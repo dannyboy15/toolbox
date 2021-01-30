@@ -29,8 +29,8 @@ Add your name and email. _Note: this configures the current repo, to set it
 globally use the `--global` flag._
 
 ```bash
-git config user.name 'Daniel Bravo'
-git config user.email 'bravod60@gmail.com'
+git config user.name 'FirstName LastName'
+git config user.email 'myemail@email.com'
 ```
 
 
