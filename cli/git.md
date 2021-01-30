@@ -183,3 +183,9 @@ diff --ignore-matching-lines="['\"].*['\"]" file.txt file2.txt > files.diff
 - [ ] include some info on rebase commands
 - [ ] add info on git-cherry-pick
 - [ ] add info on git-reflog
+- [ ] gitignore files - https://github.com/github/gitignore
+- [ ] clean up `git remote prune origin` and `git branch -vv | grep origin | grep gone | awk '{print $1}' | xargs -L 1 git branch -d`
+    - [ ] http://www.fizerkhan.com/blog/posts/Clean-up-your-local-branches-after-merge-and-delete-in-GitHub.html
+    - [ ] https://stackoverflow.com/questions/5094293/git-remote-branch-deleted-but-still-it-appears-in-branch-a
+    - [ ] https://www.atlassian.com/git/tutorials/git-prune
+    - [ ] https://stackoverflow.com/questions/6127328/how-can-i-delete-all-git-branches-which-have-been-merged
