@@ -178,6 +178,13 @@ qoute.
 diff --ignore-matching-lines="['\"].*['\"]" file.txt file2.txt > files.diff
 ```
 
+## Misc
+
+**View git colorized status in `less`**
+```bash
+git -c color.status=always status | less -REX
+```
+
 ## TODO
 - [ ] include some info on add commands
 - [ ] include some info on rebase commands
