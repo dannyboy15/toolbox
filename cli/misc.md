@@ -9,3 +9,7 @@ sqlite3 mydatabase.db < sql_script.sql
 ## Checksum files
 
 `shasum -a 256 /path/to/file /path/to/file2`
+
+## Compress multiple files with spaces in the names
+
+`find /path/to/files\ with\ spaces/**/* -exec echo -n '"{}" ' \; | xargs gzip`
