@@ -64,7 +64,9 @@ git stash <file*.txt> <dir/*>
 
 # stash certain changes (not everything that's been modified)
 
+```bash
 git stash -p
+```
 
 **stash untracked files**
 
