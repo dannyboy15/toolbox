@@ -25,6 +25,7 @@ View your current configurations
 ```bash
 git config --list
 ```
+
 Add your name and email. _Note: this configures the current repo, to set it
 globally use the `--global` flag._
 
@@ -32,7 +33,6 @@ globally use the `--global` flag._
 git config user.name 'FirstName LastName'
 git config user.email 'myemail@email.com'
 ```
-
 
 ## Stashing files
 
@@ -49,6 +49,7 @@ _Note: by default `git stash` only stashes teacked files_
 ```bash
 git stash
 ```
+
 **stash specific modified tracked files**
 
 ```bash
@@ -62,6 +63,7 @@ git stash <file*.txt> <dir/*>
 ```
 
 # stash certain changes (not everything that's been modified)
+
 git stash -p
 
 **stash untracked files**
@@ -85,14 +87,15 @@ You may want to list out the stashes first.
 ```bash
 git stash list
 ```
+
 ```
 stash@{0}: WIP on branch-1: 4h45h01 last commit message
 stash@{1}: WIP on branch-1: 4h45h02 last commit message
 ```
+
 ```bash
 git stash pop 1
 ```
-
 
 ## Making commits
 
@@ -111,7 +114,6 @@ git add -i <file>
 ```
 
 **[TODO: include some info on add commands]**
-
 
 ## Editing commits
 
@@ -136,6 +138,7 @@ it _after you have configured it_.
 ```bash
 git commit --amend --reset-author --no-edit
 ```
+
 It may also be useful if you need to edit the commit to attribute someone else.
 
 ```bash
@@ -160,11 +163,9 @@ Once your start rebasing use the commands to make the changes.
 
 **[TODO: include some info on rebase commands]**
 
-
 ## Diffs and viewing changes
 
-_Note: this uses the mac `diff` command, which is different than runnig
-`git diff`.
+_Note: this uses the mac `diff` command, which is different than runnig `git diff`._
 
 Get the diff of 2 files, ignoring double quotes/single quotes and redirect
 the diff to a file. Add the `.diff` file extension for syntax highlighting in
@@ -181,18 +182,20 @@ diff --ignore-matching-lines="['\"].*['\"]" file.txt file2.txt > files.diff
 ## Misc
 
 **View git colorized status in `less`**
+
 ```bash
 git -c color.status=always status | less -REX
 ```
 
 ## TODO
+
 - [ ] include some info on add commands
 - [ ] include some info on rebase commands
 - [ ] add info on git-cherry-pick
 - [ ] add info on git-reflog
 - [ ] gitignore files - https://github.com/github/gitignore
 - [ ] clean up `git remote prune origin` and `git branch -vv | grep origin | grep gone | awk '{print $1}' | xargs -L 1 git branch -d`
-    - [ ] http://www.fizerkhan.com/blog/posts/Clean-up-your-local-branches-after-merge-and-delete-in-GitHub.html
-    - [ ] https://stackoverflow.com/questions/5094293/git-remote-branch-deleted-but-still-it-appears-in-branch-a
-    - [ ] https://www.atlassian.com/git/tutorials/git-prune
-    - [ ] https://stackoverflow.com/questions/6127328/how-can-i-delete-all-git-branches-which-have-been-merged
+  - [ ] http://www.fizerkhan.com/blog/posts/Clean-up-your-local-branches-after-merge-and-delete-in-GitHub.html
+  - [ ] https://stackoverflow.com/questions/5094293/git-remote-branch-deleted-but-still-it-appears-in-branch-a
+  - [ ] https://www.atlassian.com/git/tutorials/git-prune
+  - [ ] https://stackoverflow.com/questions/6127328/how-can-i-delete-all-git-branches-which-have-been-merged
