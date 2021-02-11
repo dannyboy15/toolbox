@@ -193,6 +193,12 @@ git -c color.status=always status | less -REX
 
 - [ ] include some info on add commands
 - [ ] include some info on rebase commands
+  - [ ] Iteractive rebase
+    - [ ] [Article rebasing](https://thoughtbot.com/blog/git-interactive-rebase-squash-amend-rewriting-history)
+    - [ ] [Rebase properly](https://medium.com/fredwong-it/git-rebase-how-to-use-interactive-rebase-properly-34db370be995)
+  - [ ] [SO change editor when rebasing](https://stackoverflow.com/questions/19713861/git-rebase-editor-something-other-than-vim-for-easier-squashing)
+  - [ ] [Rebase keep timestamp](https://stackoverflow.com/questions/2973996/git-rebase-without-changing-commit-timestamps)
+  - [ ] [Rebase from init](https://stackoverflow.com/questions/8605447/how-to-rebase-all-the-commits-from-the-beginning)
 - [ ] add info on git-cherry-pick
 - [ ] add info on git-reflog
 - [ ] gitignore files - https://github.com/github/gitignore
@@ -201,3 +207,9 @@ git -c color.status=always status | less -REX
   - [ ] https://stackoverflow.com/questions/5094293/git-remote-branch-deleted-but-still-it-appears-in-branch-a
   - [ ] https://www.atlassian.com/git/tutorials/git-prune
   - [ ] https://stackoverflow.com/questions/6127328/how-can-i-delete-all-git-branches-which-have-been-merged
+- [ ] [Conventional Commits](https://www.conventionalcommits.org/en/
+      v1.0.0/)
+- [ ] [Git stash pop resolving conflicts](https://www.theserverside.com/video/How-to-easily-merge-and-resolve-git-stash-pop-conflicts)
+- [ ] gitconfig
+  - [ ] [Change default editor](https://dev.to/deadlybyte/make-vs-code-your-default-git-editor-j6d)
+- [ ] [Commit Message](https://dev.to/chrissiemhrk/git-commit-message-5e21)
