@@ -16,6 +16,12 @@ sqlite3 mydatabase.db < sql_script.sql
 
 `find /path/to/files\ with\ spaces/**/* -exec echo -n '"{}" ' \; | xargs gzip`
 
+## Concatenate files adding newline in between
+
+```bash
+fd requirements.txt ./ | xargs sed -e '$a\' -u | cat
+```
+
 ## Misc TODO
 
 - [ ] [Using history](https://www.howtogeek.com/465243/how-to-use-the-history-command-on-linux/)
