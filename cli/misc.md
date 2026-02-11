@@ -30,6 +30,12 @@ find /path/to/files\ with\ spaces/**/* -exec echo -n '"{}" ' \; | xargs gzip
 fd requirements.txt ./ | xargs sed -e '$a\' -u | cat
 ```
 
+## Create a blank pdf file
+
+```bash
+convert xc:none -page Letter a.pdf
+```
+
 ## Misc TODO
 
 - [ ] [Using history](https://www.howtogeek.com/465243/how-to-use-the-history-command-on-linux/)
