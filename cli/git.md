@@ -189,6 +189,12 @@ diff --ignore-matching-lines="['\"].*['\"]" file.txt file2.txt > files.diff
 git -c color.status=always status | less -REX
 ```
 
+**Delete local branches that are deleted from remote**
+
+```bash
+git remote prune origin && git branch -vv | grep origin | grep gone | awk '{print $1}' | xargs -L 1 git branch -d
+```
+
 ## TODO
 
 - [ ] include some info on add commands
